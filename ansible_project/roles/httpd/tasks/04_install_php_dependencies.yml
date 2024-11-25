@@ -1,0 +1,38 @@
+# httpd/tasks/isntall_php_dependencies.yml
+- name: Update apt cache (Debian)
+  apt:
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Install build dependencies for PHP (Debian)
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "libxml2-dev"
+    - "libcurl4-openssl-dev"
+    - "libjpeg-dev"
+    - "libpng-dev"
+    - "libmcrypt-dev"
+    - "sqlite3"
+    - "libsqlite3-dev"
+    - "libonig-dev"
+    - "pkg-config"
+  when: ansible_os_family == 'Debian'
+
+- name: Install build dependencies for PHP (Red Hat)
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "libxml2-devel"
+    - "libcurl-devel"
+    - "libjpeg-devel"
+    - "libpng-devel"
+    - "libmcrypt-devel"
+    - "sqlite"
+    - "sqlite-devel"
+    - "oniguruma"
+    - "oniguruma-devel"
+    - "pkgconfig"
+  when: ansible_os_family == 'RedHat'

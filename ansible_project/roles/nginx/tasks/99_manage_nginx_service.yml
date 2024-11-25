@@ -1,0 +1,7 @@
+# tasks/99_manage_nginx_service.yml
+
+- name: Ensure nginx is started and enabled
+  service:
+    name: nginx
+    state: started
+    enabled: true

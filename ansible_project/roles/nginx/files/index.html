@@ -1,0 +1,195 @@
+<!-- roles/nginx/files/index.html -->
+
+<!-- roles/nginx/files/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nginx Role Documentation</title>
+    <style>
+        /* Base styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #007acc;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #555;
+            margin-top: 15px;
+        }
+
+        /* Container styling */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        /* Code block styling */
+        pre, code {
+            background: #f4f4f4;
+            color: #333;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 0.9em;
+            display: block;
+            overflow-x: auto;
+            border-radius: 4px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Section styling */
+        .section {
+            margin-bottom: 20px;
+        }
+
+        /* Link styling */
+        a {
+            color: #007acc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer styling */
+        footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Nginx Role Documentation</h1>
+    <p>This documentation provides an overview of the <strong>nginx</strong> Ansible role, which installs and configures an Nginx web server to serve a static website or act as a reverse proxy.</p>
+
+    <div class="section">
+        <h2>Role Structure</h2>
+        <pre>
+roles/nginx/
+├── defaults
+│   └── main.yml
+├── files
+│   ├── index.html
+│   └── nginx-init.sh
+├── handlers
+│   └── main.yml
+├── tasks
+│   ├── 01_install_nginx_dependencies.yml
+│   ├── 02_install_nginx.yml
+│   ├── 03_configure_nginx_directories.yml
+│   ├── 04_copy_custom_site.yml
+│   ├── 05_create_nginx_configuration.yml
+│   ├── 06_link_nginx_conf_files.yml
+│   ├── 07_create_nginx_configuration.yml
+│   ├── 10_install_nginx_init_script.yml
+│   ├── 99_manage_nginx_service.yml
+│   └── main.yml
+└── templates
+    └── nginx.conf.j2
+        </pre>
+    </div>
+
+    <div class="section">
+        <h2>Files and Directories</h2>
+
+        <h3>1. defaults/main.yml</h3>
+        <p>This file defines default variables for the role, such as <code>nginx_listen_port</code>, <code>nginx_web_root</code>, and <code>nginx_conf_path</code>. These can be overridden by host-specific variables if needed.</p>
+
+        <h3>2. files/index.html</h3>
+        <p>This is the custom HTML file that will be served by Nginx. Modify this file to customize the content displayed by the web server.</p>
+
+        <h3>3. files/nginx-init.sh</h3>
+        <p>A custom <code>sysvinit</code>-style script to manage Nginx in the Docker container. It allows starting, stopping, and restarting Nginx with commands like <code>service nginx start</code>.</p>
+
+        <h3>4. handlers/main.yml</h3>
+        <p>This file contains handlers, specifically to restart Nginx when configuration changes are applied.</p>
+    </div>
+
+    <div class="section">
+        <h2>Tasks</h2>
+
+        <h3>01_install_nginx_dependencies.yml</h3>
+        <p>Installs dependencies required by Nginx, such as <code>curl</code> and <code>gnupg2</code>.</p>
+
+        <h3>02_install_nginx.yml</h3>
+        <p>Installs the Nginx package from the system's package manager.</p>
+
+        <h3>03_configure_nginx_directories.yml</h3>
+        <p>Ensures that necessary directories for Nginx are created, such as log and configuration directories.</p>
+
+        <h3>04_copy_custom_site.yml</h3>
+        <p>Copies the custom HTML site (from <code>files/index.html</code>) to the web root directory so Nginx can serve it.</p>
+
+        <h3>05_create_nginx_configuration.yml</h3>
+        <p>Generates the main Nginx configuration file using the template <code>nginx.conf.j2</code>.</p>
+
+        <h3>06_link_nginx_conf_files.yml</h3>
+        <p>Creates symbolic links to Nginx configuration files, enabling them if necessary.</p>
+
+        <h3>07_create_nginx_configuration.yml</h3>
+        <p>Another configuration file creation task, possibly creating additional configurations or virtual host files.</p>
+
+        <h3>10_install_nginx_init_script.yml</h3>
+        <p>Copies the custom init script (<code>nginx-init.sh</code>) to <code>/etc/init.d/nginx</code> and enables it for use with <code>service</code> commands.</p>
+
+        <h3>99_manage_nginx_service.yml</h3>
+        <p>Ensures that the Nginx service is started and enabled to start on boot.</p>
+    </div>
+
+    <div class="section">
+        <h2>Templates</h2>
+
+        <h3>nginx.conf.j2</h3>
+        <p>The main configuration template for Nginx. This template defines the server block, including the listening port, root directory, and any additional settings required by the role.</p>
+    </div>
+
+    <div class="section">
+        <h2>Usage</h2>
+        <p>To use this role, include it in your playbook and override any variables as needed to customize the Nginx installation. For example:</p>
+        <pre>
+- hosts: webservers
+  roles:
+    - role: nginx
+      vars:
+        nginx_listen_port: 8080
+        nginx_web_root: "/var/www/custom-site"
+        nginx_conf_path: "/etc/nginx/custom-nginx.conf"
+        </pre>
+    </div>
+
+</body>
+</html>

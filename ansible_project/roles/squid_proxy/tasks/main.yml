@@ -1,0 +1,49 @@
+# tasks/main.yml
+---
+- name: Ensure Squid is installed
+  apt:
+    name: squid
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: Ensure Squid is installed
+  yum:
+    name: squid
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Ensure the init.d directory exists
+  file:
+    path: /etc/init.d
+    state: directory
+    mode: '0755'
+
+- name: Copy the init script to /etc/init.d
+  copy:
+    src: squid-init.sh
+    dest: "/etc/init.d/{{ squid_service }}"
+    mode: '0755'
+
+
+- name: Ensure Squid service is enabled and started
+  sysvinit:
+    name: "{{ squid_service }}"
+    enabled: yes
+    state: started
+
+- name: Configure Squid
+  template:
+    src: squid.conf.j2
+    dest: "{{ squid_conf }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Ensure Squid is listening on the specified port
+  lineinfile:
+    path: "{{ squid_conf }}"
+    regexp: '^http_port'
+    line: "http_port {{ squid_port }}"
+  notify:
+    - restart squid

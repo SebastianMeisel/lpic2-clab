@@ -1,0 +1,25 @@
+# httpd/tasks/create_directories.yml
+- name: Create /etc/apache2 and subdirectories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+  with_items:
+    - /etc/apache2
+    - /etc/apache2/conf-available
+    - /etc/apache2/conf-enabled
+    - /etc/apache2/sites-available
+    - /etc/apache2/sites-enabled
+    - /etc/apache2/mods-available
+    - /etc/apache2/mods-enabled
+    - /etc/apache2/logs
+
+- name: Create document root directory
+  file:
+    path: "{{ document_root }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'

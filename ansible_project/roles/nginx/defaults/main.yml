@@ -1,0 +1,9 @@
+# defaults/main.yml
+
+nginx_listen_port: 80
+nginx_web_root: "/var/www/html"
+nginx_server_name: "localhost"
+# nginx_proxy_pass: "http://localhost:8080"
+nginx_error_log: "/var/log/nginx/error.log"
+nginx_access_log: "/var/log/nginx/access.log"
+nginx_conf_path: "/etc/nginx/nginx.conf"

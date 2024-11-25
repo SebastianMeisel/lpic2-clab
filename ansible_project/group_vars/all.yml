@@ -1,0 +1,3 @@
+# group_var/all.yml
+---
+localnet: 172.30.30.0/24

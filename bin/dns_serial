@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd roles/ansible-role-bind9/files/bind/zones/
+rm *.old *.~
+for db in db.*
+do
+  mv ${db} ${db}.old
+  awk -v OFS='\t' '/Serial/ {print "\t\t\t\t"$1+1,$2,$3} ; !/(Serial)/ {print $0}' ${db}.old > ${db}
+done
+cd -

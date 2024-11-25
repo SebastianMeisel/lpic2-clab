@@ -1,0 +1,22 @@
+* OpenSSL Certificate Role
+
+This Ansible role installs OpenSSL, creates a directory for storing the certificates, and generates a self-signed TLS certificate.
+
+** Variables
+
+- `cert_dir`: Directory to store the certificate and key files (default: `/etc/ssl/certs`).
+- `cert_name`: Base name for the certificate and key files (default: `my_certificate`).
+- `cert_country`: Country name for the certificate subject (default: `DE`).
+- `cert_state`: State name for the certificate subject (default: `Mecklenburg-Vorpommern`).
+- `cert_location`: Location for the certificate subject (default: `Mölschow`).
+- `cert_organization`: Organization name for the certificate subject.
+- `cert_organizational_unit`: Organizational unit name for the certificate subject.
+- `cert_common_name`: Common name for the certificate subject.
+
+** Usage
+
+#+BEGIN_SRC yml
+- hosts: servers
+  roles:
+    - role: openssl_certificate
+#+END_SRC

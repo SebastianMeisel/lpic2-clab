@@ -1,0 +1,19 @@
+---
+- name: Install OpenSSL
+  package:
+    name: "{{ 'openssl' }}"
+    state: present
+  when: ansible_os_family in ['Debian', 'RedHat']
+
+- name: Create directory for certificates
+  file:
+    path: "{{ cert_dir }}"
+    state: directory
+    mode: '0755'
+  notify: restart_services
+
+- name: Generate OpenSSL Configuration file
+  template:
+    src: openssl.cnf.j2
+    dest: "{{ cert_dir }}/openssl.cnf"
+    mode: '0644'

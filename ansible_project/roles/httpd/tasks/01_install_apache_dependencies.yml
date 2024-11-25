@@ -1,0 +1,33 @@
+# httpd/tasks/install_dependencies.yml
+- name: Update apt cache (Debian)
+  apt:
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Install build dependencies (Debian)
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - build-essential
+    - libtool
+    - libpcre3-dev
+    - libssl-dev
+    - zlib1g-dev
+    - "{{ apr_package_debian }}"
+    - "{{ apr_util_package_debian }}"
+  when: ansible_os_family == 'Debian'
+
+- name: Install build dependencies (Red Hat)
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - gcc
+    - make
+    - pcre-devel
+    - openssl-devel
+    - expat-devel
+    - "{{ apr_package_redhat }}"
+    - "{{ apr_util_package_redhat }}"
+  when: ansible_os_family == 'RedHat'

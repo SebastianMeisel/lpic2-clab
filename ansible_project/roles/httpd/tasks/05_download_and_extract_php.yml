@@ -1,0 +1,13 @@
+# htppd/tasks/download_and_extract_php.yml
+- name: Download PHP source
+  get_url:
+    url: "https://www.php.net/distributions/php-{{ php_version }}.tar.gz"
+    dest: "/tmp/php-{{ php_version }}.tar.gz"
+    mode: '0644'
+
+- name: Extract PHP source
+  unarchive:
+    src: "/tmp/php-{{ php_version }}.tar.gz"
+    dest: /tmp/
+    remote_src: yes
+

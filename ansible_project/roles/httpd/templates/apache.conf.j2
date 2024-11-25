@@ -1,0 +1,29 @@
+# apache_install/templates/apache.conf.j2
+ServerRoot "{{ apache_configuration_dir }}"
+Listen 80
+
+# Include configurations from /etc/apache2
+IncludeOptional conf-enabled/*.conf
+IncludeOptional mods-enabled/*.load
+IncludeOptional mods-enabled/*.conf
+IncludeOptional sites-enabled/*.conf
+
+<IfModule mime_module>
+    AddHandler php-script .php
+    AddType application/x-httpd-php .php
+</IfModule>
+
+<VirtualHost *:80> 
+    ServerName apache.sebas.tian
+    ServerAlias www.sebas.tian
+    DocumentRoot "{{ document_root }}"
+</VirtualHost>
+
+<Directory "{{ document_root }}">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+
+ErrorLog logs/error_log
+CustomLog logs/access_log common

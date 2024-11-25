@@ -1,0 +1,12 @@
+---
+# - hosts: dns
+#   roles:
+#     - bind9
+# - hosts: apache
+#   roles:
+#     - httpd
+#     - ssl
+#     - squid_proxy
+- hosts: nginx
+  roles:
+    - nginx

@@ -1,0 +1,11 @@
+# roles/nginx/tasks/06_install_nginx_init_script.yml
+
+- name: Copy custom nginx init script
+  copy:
+    src: nginx-init.sh
+    dest: /etc/init.d/nginx
+    mode: '0755'
+
+- name: Enable nginx service in init
+  command: update-rc.d nginx defaults
+  when: ansible_service_mgr == "sysvinit"

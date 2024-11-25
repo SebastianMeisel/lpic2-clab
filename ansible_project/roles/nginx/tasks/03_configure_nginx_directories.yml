@@ -1,0 +1,16 @@
+# tasks/03_configure_nginx_directories.yml
+
+- name: Create nginx log directory
+  file:
+    path: "/var/log/nginx"
+    state: directory
+    mode: '0755'
+
+
+- name: Create web root directory
+  file:
+    path: "{{ nginx_web_root }}"
+    state: directory
+    owner: www-data  # Replace with 'nginx' if using the nginx user
+    group: www-data  # Replace with 'nginx' if using the nginx group
+    mode: '0755'

@@ -1,0 +1,7 @@
+# roles/nginx/tasks/03_copy_custom_site.yml
+
+- name: Copy custom site files
+  copy:
+    src: index.html
+    dest: "{{ nginx_web_root }}/index.html"
+    mode: '0644'

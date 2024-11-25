@@ -1,0 +1,5 @@
+---
+- name: restart_apache
+  sysvinit:
+    name: 'apache2'
+    state: restarted

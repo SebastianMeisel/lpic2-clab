@@ -1,0 +1,5 @@
+# httpd/tasks/main.yml
+
+- name: Include files in numerical order
+  include_tasks: "{{ item }}"
+  loop: "{{ lookup('fileglob', '??_*.yml', wantlist=True) | sort(reverse=False) }}"

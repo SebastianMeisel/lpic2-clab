@@ -1,0 +1,19 @@
+# httpd/tasks/configure_php.yml
+
+- name: Change to the PHP source directory
+  command: chdir=/tmp/php-{{ php_version }} true  # Just change the directory
+  when: use_php
+
+- name: Configure PHP
+  command: ./configure --prefix=/usr/local/php \
+            --with-apxs2=/usr/local/apache2/bin/apxs \
+            --with-mysqli \
+            --with-zlib \
+            --enable-mbstring \
+            --enable-soap \
+            --with-curl \
+            --enable-bcmath \
+            --enable-intl
+  args:
+    chdir: "/tmp/php-{{ php_version }}"
+  when: use_php

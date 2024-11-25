@@ -1,0 +1,8 @@
+# tasks/05_link_nginx_conf_files.yml
+
+- name: Link nginx configuration files
+  file:
+    src: "{{ nginx_conf_path }}"
+    dest: "/etc/nginx/sites-enabled/default"
+    state: link
+  notify: restart nginx

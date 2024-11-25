@@ -1,0 +1,11 @@
+# httpd/tasks/compile_and_install_php.yml
+
+- name: Compile PHP
+  command: make
+  args:
+    chdir: "/tmp/php-{{ php_version }}"
+
+- name: Install PHP
+  command: make install
+  args:
+    chdir: "/tmp/php-{{ php_version }}"

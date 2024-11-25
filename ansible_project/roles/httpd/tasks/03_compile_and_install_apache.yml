@@ -1,0 +1,18 @@
+# httpd/tasks/compile_and_install.yml
+- name: Change to the Apache source directory
+  command: chdir=/tmp/httpd-{{ apache_version }} true  # Just change the directory
+
+- name: Configure Apache
+  command: ./configure --prefix={{ apache_install_dir }}
+  args:
+    chdir: "/tmp/httpd-{{ apache_version }}"
+
+- name: Compile Apache
+  command: make
+  args:
+    chdir: "/tmp/httpd-{{ apache_version }}"
+
+- name: Install Apache
+  command: make install
+  args:
+    chdir: "/tmp/httpd-{{ apache_version }}"

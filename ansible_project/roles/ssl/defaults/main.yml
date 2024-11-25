@@ -1,0 +1,8 @@
+cert_dir: "/etc/ssl/certs"
+cert_name: "my_certificate"
+cert_country: "DE"
+cert_state: "Mecklenburg-Vorpommern"
+cert_location: "Place"
+cert_organization: "Sebastian Meisel"
+cert_organizational_unit: "LPIC studies"
+cert_common_name: "www.sebas.tian"

@@ -1,0 +1,17 @@
+# defaults/main.yml
+squid_version: "4.15"
+squid_package: "squid"
+squid_service: "squid"
+squid_conf: "/etc/squid/squid.conf"
+squid_port: 3128
+squid_shutdown_lifetime: 10 seconds
+# cache
+squid_cache_mem: 512MB
+squid_cache_mgr: sebastian.meisel@gmail.com
+squid_maximum_object_size: 10 MB
+squid_cache_dir: /var/cache/squid
+squid_cache_dir_type: diskd
+# ufs (standard) | aufs (asynchronous) | diskd (separate disk daemon)
+# rock (fixed size database)
+squid_cache_dir_size: 500 # in MB
+ 

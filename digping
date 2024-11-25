@@ -1,0 +1,6 @@
+function digping () {
+	server=$2
+	fqd=$1
+	type=${3:-A}
+	dig @${server} ${fqd} ${type} |  awk '/^'${fqd}'/ {print $5}' | xargs ping 
+}

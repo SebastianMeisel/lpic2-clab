@@ -1,0 +1,7 @@
+# tasks/04_create_nginx_configuration.yml
+
+- name: Create nginx configuration
+  template:
+    src: "nginx.conf.j2"
+    dest: "{{ nginx_conf_path }}"
+  notify: restart nginx

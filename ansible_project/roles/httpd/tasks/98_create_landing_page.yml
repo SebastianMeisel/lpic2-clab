@@ -1,0 +1,12 @@
+# httpd_/tasks/copy_landing_page.yml
+- name: Copy landing page
+  template:
+    src: index.html.j2
+    dest: "{{ document_root }}/index.html"
+  notify: Restart Apache
+
+- name: Copy comments PHP script
+  template:
+    src: comments.php.j2
+    dest: "{{ document_root }}/comments.php"
+  notify: Restart Apache

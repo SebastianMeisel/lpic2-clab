@@ -1,0 +1,42 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          apache2
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts the Apache HTTP Server
+### END INIT INFO
+
+APACHE_BIN="/usr/local/apache2/bin/httpd"
+APACHE_CONFIG_DIR="/etc/apache2/"
+APACHE_CONFIG_FILE="httpd.conf"
+APACHE_CTL="/usr/local/apache2/bin/apachectl"
+
+case "$1" in
+  start)
+    echo "Starting Apache..."
+    $APACHE_CTL -d ${APACHE_CONFIG_DIR} -f ${APACHE_CONFIG_FILE}
+    ;;
+  stop)
+    echo "Stopping Apache..."
+    $APACHE_CTL -k stop -d ${APACHE_CONFIG_DIR} -f ${APACHE_CONFIG_FILE}
+    ;;
+  restart)
+    echo "Restarting Apache..."
+    $APACHE_CTL -k graceful -d ${APACHE_CONFIG_DIR} -f ${APACHE_CONFIG_FILE}
+    ;;
+  status)
+    if pgrep -x "httpd" > /dev/null; then
+      echo "Apache is running."
+    else
+      echo "Apache is not running."
+    fi
+    ;;
+  *)
+    echo "Usage: /etc/init.d/apache2 {start|stop|restart|status}"
+    exit 1
+    ;;
+esac
+
+exit 0

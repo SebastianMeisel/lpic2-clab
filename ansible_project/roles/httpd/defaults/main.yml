@@ -1,0 +1,35 @@
+# http/defaults/main.yml
+apache_source_url: "https://dlcdn.apache.org/httpd/httpd-2.4.62.tar.bz2"
+apache_version: "2.4.62"
+apache_install_dir: "/usr/local/apache2"
+apache_configuration_dir: "/etc/apache2"
+
+document_root: "/var/www/html" 
+apr_package_debian: "libapr1-dev"
+apr_util_package_debian: "libaprutil1-dev"  # Add APR-util package for Debian
+apr_package_redhat: "apr-devel"
+apr_util_package_redhat: "apr-util-devel"  # Add APR-util package for Red Hat
+php_version: "8.3.12"
+php_packages:
+  debian:
+    - php
+    - libapache2-mod-php
+    - php-mysql
+  redhat:
+    - php
+    - php-cli
+    - php-common
+    - php-mysqlnd
+use_php: no  # Set to 'yes' to enable PHP
+enable_mods:
+  - unixd
+  - dir
+  - mime
+  - log_config
+  - env
+  - setenvif
+  - authz_core
+  - authz_host
+  - libphp
+enable_confs:
+  - httpd-default

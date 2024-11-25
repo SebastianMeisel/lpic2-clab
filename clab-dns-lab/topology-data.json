@@ -1,0 +1,324 @@
+{
+  "name": "dns-lab",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "sebastian",
+        "bridge": "br-2602aa68f8fc",
+        "ipv4-subnet": "172.30.30.0/24",
+        "ipv4-gw": "172.30.30.1",
+        "ipv6-subnet": "2001:db8:30:30::/64",
+        "ipv6-gw": "2001:db8:30:30::1",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "apache-server": {
+      "index": "0",
+      "shortname": "apache-server",
+      "longname": "clab-dns-lab-apache-server",
+      "fqdn": "apache-server.dns-lab.io",
+      "group": "",
+      "labdir": "/home/clab/clab-dns-lab/apache-server",
+      "kind": "linux",
+      "image": "ubuntu-ssh:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.254",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:db8:30:30::2:1",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-2602aa68f8fc",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/clab/clab-dns-lab/apache-server",
+        "clab-node-name": "apache-server",
+        "clab-node-type": "",
+        "clab-owner": "clab",
+        "clab-topo-file": "/home/clab/dns-lab.clab.yml",
+        "containerlab": "dns-lab"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 22,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "client-1": {
+      "index": "1",
+      "shortname": "client-1",
+      "longname": "clab-dns-lab-client-1",
+      "fqdn": "client-1.dns-lab.io",
+      "group": "",
+      "labdir": "/home/clab/clab-dns-lab/client-1",
+      "kind": "linux",
+      "image": "ubuntu-ssh:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:db8:30:30::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-2602aa68f8fc",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/clab/clab-dns-lab/client-1",
+        "clab-node-name": "client-1",
+        "clab-node-type": "",
+        "clab-owner": "clab",
+        "clab-topo-file": "/home/clab/dns-lab.clab.yml",
+        "containerlab": "dns-lab"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 22,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "client-2": {
+      "index": "2",
+      "shortname": "client-2",
+      "longname": "clab-dns-lab-client-2",
+      "fqdn": "client-2.dns-lab.io",
+      "group": "",
+      "labdir": "/home/clab/clab-dns-lab/client-2",
+      "kind": "linux",
+      "image": "ubuntu-ssh:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:db8:30:30::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-2602aa68f8fc",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/clab/clab-dns-lab/client-2",
+        "clab-node-name": "client-2",
+        "clab-node-type": "",
+        "clab-owner": "clab",
+        "clab-topo-file": "/home/clab/dns-lab.clab.yml",
+        "containerlab": "dns-lab"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 22,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "dns-primary": {
+      "index": "3",
+      "shortname": "dns-primary",
+      "longname": "clab-dns-lab-dns-primary",
+      "fqdn": "dns-primary.dns-lab.io",
+      "group": "",
+      "labdir": "/home/clab/clab-dns-lab/dns-primary",
+      "kind": "linux",
+      "image": "ubuntu-ssh:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.100",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:db8:30:30::1:0",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-2602aa68f8fc",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/clab/clab-dns-lab/dns-primary",
+        "clab-node-name": "dns-primary",
+        "clab-node-type": "",
+        "clab-owner": "clab",
+        "clab-topo-file": "/home/clab/dns-lab.clab.yml",
+        "containerlab": "dns-lab"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 22,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "dns-secondary": {
+      "index": "4",
+      "shortname": "dns-secondary",
+      "longname": "clab-dns-lab-dns-secondary",
+      "fqdn": "dns-secondary.dns-lab.io",
+      "group": "",
+      "labdir": "/home/clab/clab-dns-lab/dns-secondary",
+      "kind": "linux",
+      "image": "ubuntu-ssh:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.101",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:db8:30:30::1:1",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-2602aa68f8fc",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/clab/clab-dns-lab/dns-secondary",
+        "clab-node-name": "dns-secondary",
+        "clab-node-type": "",
+        "clab-owner": "clab",
+        "clab-topo-file": "/home/clab/dns-lab.clab.yml",
+        "containerlab": "dns-lab"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 22,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "nginx-server": {
+      "index": "5",
+      "shortname": "nginx-server",
+      "longname": "clab-dns-lab-nginx-server",
+      "fqdn": "nginx-server.dns-lab.io",
+      "group": "",
+      "labdir": "/home/clab/clab-dns-lab/nginx-server",
+      "kind": "linux",
+      "image": "ubuntu-ssh:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.253",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:db8:30:30::2:2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-2602aa68f8fc",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/clab/clab-dns-lab/nginx-server",
+        "clab-node-name": "nginx-server",
+        "clab-node-type": "",
+        "clab-owner": "clab",
+        "clab-topo-file": "/home/clab/dns-lab.clab.yml",
+        "containerlab": "dns-lab"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 22,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "switch": {
+      "index": "6",
+      "shortname": "switch",
+      "longname": "clab-dns-lab-switch",
+      "fqdn": "switch.dns-lab.io",
+      "group": "",
+      "labdir": "/home/clab/clab-dns-lab/switch",
+      "kind": "ovs-bridge",
+      "image": "",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-2602aa68f8fc",
+        "clab-node-group": "",
+        "clab-node-kind": "ovs-bridge",
+        "clab-node-lab-dir": "/home/clab/clab-dns-lab/switch",
+        "clab-node-name": "switch",
+        "clab-node-type": "",
+        "clab-owner": "clab",
+        "clab-topo-file": "/home/clab/dns-lab.clab.yml",
+        "containerlab": "dns-lab"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "switch",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:6d:3f:05",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dns-primary",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:f0:c8:2e",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "switch",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:f4:5f:23",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dns-secondary",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:d9:74:fa",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "switch",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:cc:16:06",
+        "peer": "z"
+      },
+      "z": {
+        "node": "client-1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:81:6a:b6",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "switch",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:98:08:d6",
+        "peer": "z"
+      },
+      "z": {
+        "node": "client-2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:4a:61:a7",
+        "peer": "a"
+      }
+    }
+  ]
+}

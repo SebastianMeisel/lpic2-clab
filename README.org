@@ -1,0 +1,161 @@
++:LaTeX_PROPERTIES:
+#+LANGUAGE: de
+#+OPTIONS: d:nil todo:nil pri:nil tags:nil
+#+OPTIONS: H:4
+#+LaTeX_CLASS: orgstandard
+#+LaTeX_CMD: xelatex
+:END:
+
+#+TITLE: BIND9 and Apache Containerlab setup
+#+AUTHOR: Sebastian Meisel
+
+:HTML_PROPERTIES:
+#+OPTIONS: num:nil toc:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="mystyle.css" />
+:END:
+
+#+ATTR_HTML: :width 100% :alt The Ostseepinguin banner showing a baltic penguin on the beach.
+#+ATTR_LATEX: :width .65\linewidth
+#+ATTR_ORG: :width 700
+[[file:img/Ostseepinguin.png]]
+
+
+#+NAME: toggle-mode-script
+#+BEGIN_EXPORT HTML
+<input type="checkbox" id="darkmode-toggle">
+<label for="darkmode-toggle"></label></input>
+<script src="script.js"></script>
+#+END_EXPORT
+
+#+begin_menu
+# [[file:NetworkNamespaceDNS.DE.org][🇩🇪 DE]]
+# - > [[file:index.org][Home]]
+# - > [[file:NetworkNamespace.org][Part I]]
+--------
+#+ATTR_HTML: :width 16px :alt Mastodon
+#+ATTR_LATEX: :width .65\linewidth
+#+ATTR_ORG: :width 20
+[[file:img/Mastodon.png]] https://emacs.ch/@SebasTEAan
+
+📧 [[mailto:sebastian.meisel+ostseepinguin@gmail.com][sebastian.meisel at gmail.com]]
+#+end_menu
+
+* Why?
+
+In preparation of my 
+
+
+#+BEGIN_SRC bash :results verbatim
+tree | grep -v "~"
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+.
+├── ansible_project
+│   ├── group_vars
+│   │   ├── apache.yml
+│   │   ├── dns.yml
+│   ├── host_vars
+│   │   ├── client-1.yml
+│   │   ├── client-2.yml
+│   │   ├── dns-primary.yml
+│   │   ├── dns-secondary.yml
+│   │   └── switch.yml
+│   ├── inventory
+│   │   ├── inventory.yml
+│   ├── library
+│   ├── main.yml -> playbooks/main.yml
+│   ├── playbooks
+│   │   ├── main.yml
+│   └── roles
+│       ├── bind9
+│       │   ├── defaults
+│       │   │   ├── main.yml
+│       │   ├── files
+│       │   │   └── bind
+│       │   │       └── zones
+│       │   │           ├── db.30.30.172.in-addr.arpa
+│       │   │           ├── db.30.30.172.in-addr.arpa.old
+│       │   │           ├── db.sebas.tian
+│       │   │           ├── db.sebas.tian.old
+│       │   ├── handlers
+│       │   │   ├── main.yml
+│       │   ├── LICENSE
+│       │   ├── meta
+│       │   │   └── main.yml
+│       │   ├── molecule
+│       │   │   └── default
+│       │   │       ├── converge.yml
+│       │   │       ├── molecule.yml
+│       │   │       └── roles
+│       │   │           └── ansible-role-bind9 -> ../../..
+│       │   ├── README.md
+│       │   ├── requirements.yml
+│       │   ├── tasks
+│       │   │   ├── create_ddns_keys.yml
+│       │   │   ├── main_old
+│       │   │   ├── main.yml
+│       │   └── templates
+│       │       ├── bind
+│       │       │   ├── named.conf.local.j2
+│       │       │   ├── named.conf.options.j2
+│       │       │   ├── rndc.key.j2
+│       │       │   └── zones
+│       │       │       └── db.template.j2
+│       │       └── logrotate.d
+│       │           └── bind.j2
+│       └── httpd
+│           ├── defaults
+│           │   └── main.yml
+│           ├── handlers
+│           │   └── main.yml
+│           ├── tasks
+│           │   ├── compile_and_install_apache.yml
+│           │   ├── compile_and_install_php.yml
+│           │   ├── configure_apache.yml
+│           │   ├── configure_php.yml
+│           │   ├── create_apache_configuration.yml
+│           │   ├── create_apache_directories.yml
+│           │   ├── create_php_configuration.yml
+│           │   ├── download_and_extract_apache.yml
+│           │   ├── download_and_extract_php.yml
+│           │   ├── install_apache_dependencies.yml
+│           │   ├── install_php_dependencies.yml
+│           │   ├── main.yml
+│           │   └── manage_apache_service.yml
+│           └── templates
+│               ├── apache.conf.j2
+│               ├── apache-init.sh.j2
+│               ├── comments.php.j2
+│               └── index.html.j2
+├── bin
+│   ├── dns_serial
+│   ├── ovs-switch
+├── clab-dns-lab
+│   ├── ansible-inventory.yml
+│   ├── authorized_keys
+│   └── topology-data.json
+├── containerlab.setup
+├── digping
+├── dns-lab.clab.drawio
+├── dns-lab.clab.yml
+├── docker
+│   ├── Dockerfile
+│   └── PYaml
+│       ├── Dockerfile
+├── httpd.strace
+├── img
+│   ├── Mastodon.png
+│   ├── Ostseepinguin.png
+│   └── ovs-net.png
+├── Mastodon.png
+├── mystyle.css
+├── Ostseepinguin.png
+├── README.org
+├── script.css
+└── script.js
+
+34 directories, 87 files
+#+end_example
+

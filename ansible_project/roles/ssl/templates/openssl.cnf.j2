@@ -1,0 +1,21 @@
+[ req ]
+default_bits       = 2048
+default_keyfile    = {{ cert_name }}.key
+distinguished_name = req_distinguished_name
+prompt             = no
+req_extensions     = req_ext   
+
+[ req_distinguished_name ]
+C  = {{ cert_country }}
+ST = {{ cert_state }}
+L  = {{ cert_location }}
+O  = {{ cert_organization }}
+OU = {{ cert_organizational_unit }}
+CN = {{ cert_common_name }}
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = {{ cert_common_name }}
+DNS.2 = sebas.tian

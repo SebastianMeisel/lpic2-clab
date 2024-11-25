@@ -1,0 +1,6 @@
+# tasks/02_install_nginx.yml
+
+- name: Install nginx
+  package:
+    name: nginx
+    state: present

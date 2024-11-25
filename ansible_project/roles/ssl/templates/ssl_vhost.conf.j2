@@ -1,0 +1,22 @@
+Listen 443
+<VirtualHost *:443>
+    ServerAdmin webmaster@{{ cert_common_name }}
+    ServerName {{ cert_common_name }}
+
+    DocumentRoot /var/www/html
+
+    SSLEngine on
+    SSLCertificateFile {{ cert_dir }}/{{ cert_name }}.crt
+    SSLCertificateKeyFile {{ cert_dir }}/{{ cert_name }}.key
+
+    <FilesMatch "\.(cgi|shtml|phtml|php)$">
+        SSLOptions +StdEnvVars
+    </FilesMatch>
+
+    <Directory /usr/lib/cgi-bin>
+        SSLOptions +StdEnvVars
+    </Directory>
+
+    ErrorLog logs/error.log
+    CustomLog logs/access.log combined
+</VirtualHost>

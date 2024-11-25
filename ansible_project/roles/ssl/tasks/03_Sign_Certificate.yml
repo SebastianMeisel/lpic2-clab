@@ -1,0 +1,32 @@
+- name: Fetch CSR from remote host to Ansible controller
+  fetch:
+    src: "{{ cert_dir }}/{{ cert_name }}.csr"
+    dest: "/tmp/{{ cert_name }}.csr"
+    flat: yes
+
+- name: mv certificate to CA-directory on controller
+  delegate_to: localhost
+  command: >
+    mv /tmp/{{ cert_name }}.csr /etc/pki/demoCA/newreq.pem
+  args:
+    creates: "/tmp/newreq.pem"
+  become: true
+
+- name: Sign the CSR on the Ansible controller
+  delegate_to: localhost
+  command: >
+    /usr/share/ssl/misc/CA.pl -sign
+  args:
+    chdir: "/etc/pki/demoCA"
+    creates: "/etc/pki/demoCA/newcert.pem"
+  environment:
+    PATH: "/usr/bin:/usr/share/ssl/misc"
+  become: true
+
+- name: Rename signed certificate on controller for easy transfer
+  delegate_to: localhost
+  command: >
+    mv /etc/pki/demoCA/newcert.pem /tmp/{{ cert_name }}.crt
+  args:
+    creates: "/tmp/{{ cert_name }}.crt"
+  become: true

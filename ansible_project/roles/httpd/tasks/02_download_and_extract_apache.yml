@@ -1,0 +1,12 @@
+# httpd/tasks/download_and_extract.yml
+- name: Download Apache source
+  get_url:
+    url: "{{ apache_source_url }}"
+    dest: "/tmp/httpd-{{ apache_version }}.tar.bz2"
+    mode: '0644'
+
+- name: Extract Apache source
+  unarchive:
+    src: "/tmp/httpd-{{ apache_version }}.tar.bz2"
+    dest: /tmp/
+    remote_src: yes

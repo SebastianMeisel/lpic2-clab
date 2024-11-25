@@ -1,0 +1,23 @@
+# httpd/tasks/create_apache_configuration.yml
+- name: Create init script for Apache
+  template:
+    src: apache-init.sh.j2
+    dest: /etc/init.d/apache2
+  notify: Restart Apache
+
+- name: Ensure init script is executable
+  file:
+    path: /etc/init.d/apache2
+    mode: '0755'
+
+- name: Download a2enmod script
+  get_url:
+    url: "https://raw.githubusercontent.com/rudisimo/a2enmod/refs/heads/master/bin/a2enmod"
+    dest: "/usr/local/bin/a2enmod"
+    mode: '0755'
+
+- name: Create Apache configuration file
+  template:
+    src: apache.conf.j2
+    dest: "{{ apache_configuration_dir }}/httpd.conf"
+  notify: Restart Apache

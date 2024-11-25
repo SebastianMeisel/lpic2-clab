@@ -1,0 +1,15 @@
+- name: Create SSL Virtual Host configuration file
+  template:
+    src: ssl_vhost.conf.j2
+    dest: "/etc/apache2/sites-available/{{ cert_name }}-ssl.conf"
+    mode: '0644'
+  notify: restart_apache
+  when: ansible_os_family == "Debian"
+
+- name: Enable SSL Virtual Host
+  file:
+    src: "/etc/apache2/sites-available/{{ cert_name }}-ssl.conf"
+    dest: "/etc/apache2/sites-enabled/{{ cert_name }}-ssl.conf"
+    state: link
+  notify: restart_apache
+  when: ansible_os_family == "Debian"

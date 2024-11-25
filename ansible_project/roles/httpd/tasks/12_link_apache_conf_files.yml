@@ -1,0 +1,38 @@
+# roles/httpd/link_apache_conf_files.yml
+- name: Ensure /etc/apache2/conf directory exists
+  file:
+    path: /etc/apache2/conf
+    state: directory
+    mode: '0755'
+
+- name: Link mime.types to /etc/apache2/conf/
+  file:
+    src: /usr/local/apache2/conf/mime.types
+    dest: /etc/apache2/conf/mime.types
+    state: link
+
+- name: Link magic to /etc/apache2/conf/
+  file:
+    src: /usr/local/apache2/conf/magic
+    dest: /etc/apache2/conf/magic
+    state: link
+
+- name: Get list of files in /usr/local/apache2/conf/extra
+  find:
+    paths: /usr/local/apache2/conf/extra
+    file_type: file
+  register: extra_conf_files
+
+- name: Hardlink files to /etc/apache2/conf-available
+  file:
+    src: "{{ item.path }}"
+    dest: "/etc/apache2/conf-available/{{ item.path | basename }}"
+    state: link
+  loop: "{{ extra_conf_files.files }}"
+
+- name: Enable extra configurations
+  file:
+    src: "/etc/apache2/conf-available/{{ item }}.conf"
+    dest: "/etc/apache2/conf-enabled/{{ item }}.conf"
+    state: link
+  loop: "{{ enable_confs }}"

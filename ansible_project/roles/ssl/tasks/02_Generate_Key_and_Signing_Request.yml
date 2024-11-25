@@ -1,0 +1,18 @@
+- name: Generate private key
+  command: >
+    openssl genpkey
+    -algorithm RSA
+    -out {{ cert_dir }}/{{ cert_name }}.key
+    -pkeyopt rsa_keygen_bits:2048
+  args:
+    creates: "{{ cert_dir }}/{{ cert_name }}.key"
+
+- name: Generate certificate signing request (CSR)
+  command: >
+    openssl req
+    -new
+    -key {{ cert_dir }}/{{ cert_name }}.key
+    -out {{ cert_dir }}/{{ cert_name }}.csr
+    -config {{ cert_dir }}/openssl.cnf
+  args:
+    creates: "{{ cert_dir }}/{{ cert_name }}.csr"

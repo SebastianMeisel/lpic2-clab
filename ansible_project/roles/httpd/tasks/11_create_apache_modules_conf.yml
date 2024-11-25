@@ -1,0 +1,17 @@
+# httpd/tasks/create_apache_modules_config.yml
+
+- name: Create load files for all Apache modules
+  shell: |
+    for module in /usr/local/apache2/modules/*.so; do
+      module_name=$(basename "$module" .so | sed 's/^mod_//')
+      echo "LoadModule ${module_name}_module ${module}" > "/etc/apache2/mods-available/${module_name}.load"
+    done
+    sed -E 's/lib(php_module)/\1/' /etc/apache2/mods-available/libphp.load -i
+  args:
+    creates: /etc/apache2/mods-available/rewrite.load  # Change to a module that will be created
+
+- name: Enable typical mods (Debian)
+  command: a2enmod {{ item }}
+  with_items: "{{ enable_mods }}"
+  when: ansible_os_family == 'Debian'
+  notify: Restart Apache

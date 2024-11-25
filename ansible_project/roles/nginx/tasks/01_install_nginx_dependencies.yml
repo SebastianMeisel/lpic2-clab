@@ -1,0 +1,9 @@
+# tasks/01_install_nginx_dependencies.yml
+
+- name: Install nginx dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - curl
+    - gnupg2

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Apache</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: #35424a;
+            color: white;
+            padding: 10px 0;
+        }
+        h1 {
+            margin: 0;
+            padding: 20px;
+        }
+        p {
+            font-size: 1.2em;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Apache Server Installed via Ansible</h1>
+    </header>
+    <main>
+        <p>Your Apache server is up and running successfully!</p>
+        <p>To learn more about managing Apache with Ansible, visit the documentation.</p>
+        {% if use_php == true %}
+	<?php phpinfo(); ?>
+        <p><a href="comments.php">Leave a Comment</a></p>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; {{ ansible_date_time.year }} Your Company Name</p>
+    </footer>
+</body>
+</html>

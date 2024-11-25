@@ -1,0 +1,88 @@
+# dns-lab.containerlab.yml
+name: dns-lab
+
+mgmt:
+  network: sebastian
+  ipv4-subnet: 172.30.30.0/24
+  ipv6-subnet: 2001:db8:30:30::/64
+
+topology:
+  nodes:
+    switch:
+      kind: ovs-bridge
+    dns-primary:
+      kind: linux
+      image: ubuntu-ssh:latest
+      user: root
+      mgmt-ipv4: 172.30.30.100
+      mgmt-ipv6: 2001:db8:30:30::1:0
+      dns:
+        servers:
+          - 127.0.0.1
+          - 1.0.0.1
+        search:
+          - sebas.tian
+    dns-secondary:
+      kind: linux
+      image: ubuntu-ssh:latest
+      user: root
+      mgmt-ipv4: 172.30.30.101
+      mgmt-ipv6: 2001:db8:30:30::1:1
+      dns:
+        servers:
+          - 172.30.30.100
+          - 172.30.30.101
+          - 1.0.0.1
+        search:
+          - sebas.tian
+    apache-server:
+      kind: linux
+      image: ubuntu-ssh:latest
+      user: root
+      mgmt-ipv4: 172.30.30.254
+      mgmt-ipv6: 2001:db8:30:30::2:1
+      dns:
+        servers:
+          - 172.30.30.100
+          - 172.30.30.101
+          - 1.0.0.1
+        search:
+          - sebas.tian
+    nginx-server:
+      kind: linux
+      image: ubuntu-ssh:latest
+      user: root
+      mgmt-ipv4: 172.30.30.253
+      mgmt-ipv6: 2001:db8:30:30::2:2
+      dns:
+        servers:
+          - 172.30.30.100
+          - 172.30.30.101
+          - 1.0.0.1
+        search:
+          - sebas.tian
+    client-1:
+      kind: linux
+      image: ubuntu-ssh:latest
+      user: root
+      dns:
+        servers:
+          - 172.30.30.100
+          - 172.30.30.101
+        search:
+          - sebas.tian
+    client-2:
+      kind: linux
+      image: ubuntu-ssh:latest
+      user: root
+      dns:
+        servers:
+          - 172.30.30.100
+          - 172.30.30.101
+        search:
+          - sebas.tian
+  links:
+    - endpoints: ["switch:eth1","dns-primary:eth1"]
+    - endpoints: ["switch:eth2","dns-secondary:eth1"]
+    - endpoints: ["switch:eth3","client-1:eth1"]
+    - endpoints: ["switch:eth4","client-2:eth1"]

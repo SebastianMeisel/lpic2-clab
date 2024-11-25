@@ -1,0 +1,4 @@
+#!/bin/bash
+[[ $(whoami) != "root" ]] && echo "sudo needed!" && exit
+systemctl start ovs-vswitchd.service
+# ovs-vsctl add-br switch

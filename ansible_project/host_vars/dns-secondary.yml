@@ -1,0 +1,10 @@
+bind9_zones_static:
+- name: sebas.tian
+  type: slave
+- name: 30.30.172.in-addr.arpa
+  type: slave
+bind9_masters:
+- name: clab_dns_lab_dns_primary
+  addresses:
+    - 172.30.30.100
+bind9_recursors: our_network

@@ -1,0 +1,19 @@
+all:
+  children:
+    apache:
+      hosts:
+        apache-server: {}
+    client:
+      hosts:
+        client-1: {}
+        client-2: {}
+    dns:
+      hosts:
+        dns-primary: {}
+        dns-secondary: {}
+    nginx:
+      hosts:
+        nginx-server: {}
+  vars:
+    ansible_httpapi_use_proxy: false
+

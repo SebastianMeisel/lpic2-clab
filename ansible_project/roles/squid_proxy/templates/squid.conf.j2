@@ -1,0 +1,23 @@
+# squid.conf.j2
+http_port {{ squid_port }}
+visible_hostname squidproxy
+shutdown_lifetime {{ squid_shutdown_lifetime }}
+
+# cache
+cache_mgr {{ squid_cache_mgr }}
+cache_mem {{ squid_cache_mem }}
+cache_dir {{ squid_cache_dir }} {{ squid_cache_dir_type }} {{ squid_cache_dir_size }} 16 256
+maximum_object_size {{ squid_maximum_object_size }}
+
+# Access Control Lists (ACL)
+acl all src all
+acl localnet src {{ localnet }}
+acl localhost src 127.0.0.1/32 ::1
+
+# HTTP Access rules
+http_access allow localhost
+http_access allow localnet
+http_access deny all
+
+# Logging
+access_log /var/log/squid/access.log

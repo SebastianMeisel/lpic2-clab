@@ -1,0 +1,20 @@
+---
+use_php: true
+enable_mods:
+  - unixd
+  - dir
+  - mime
+  - log_config
+  - env
+  - setenvif
+  - authz_core
+  - authz_host
+  - access_compat
+  - rewrite
+  - libphp
+  - alias
+  - negotiation
+  - ssl
+enable_confs:
+  - httpd-default
+  - httpd-manual

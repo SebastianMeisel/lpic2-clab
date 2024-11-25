@@ -1,0 +1,18 @@
+---
+- name: Copy signed certificate to remote host
+  copy:
+    src: "/tmp/{{ cert_name }}.crt"
+    dest: "{{ cert_dir }}/{{ cert_name }}.crt"
+    mode: '0644'
+  
+- name: Clean up CSR from remote host
+  file:
+    path: "{{ cert_dir }}/{{ cert_name }}.csr"
+    state: absent
+
+- name: Clean up temporary signed certificate on controller
+  delegate_to: localhost
+  file:
+    path: "/tmp/{{ cert_name }}.crt"
+    state: absent
+  become: true
