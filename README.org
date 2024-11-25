@@ -1,4 +1,4 @@
-#+:LaTeX_PROPERTIES:
+:LaTeX_PROPERTIES:
 #+LANGUAGE: de
 #+OPTIONS: d:nil todo:nil pri:nil tags:nil
 #+OPTIONS: H:4
